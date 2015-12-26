@@ -1,0 +1,395 @@
+<BASE HREF="http://hem.bredband.net/b106676/llusoft/download/pdb_file_structure.doc"><table border=1 width=100%><tr><td><table border=1 bgcolor=#ffffff cellpadding=10 cellspacing=0 width=100% color=#ffffff><tr><td><font face=arial,sans-serif color=black size=-1>To jest wersja html pliku <A HREF="http://hem.bredband.net/b106676/llusoft/download/pdb_file_structure.doc"><font color=blue>http://hem.bredband.net/b106676/llusoft/download/pdb_file_structure.doc</font></a>.<br> <b><font color=#0039b6>G</font> <font color=#c41200>o</font> <font color=#f3c518>o</font> <font color=#0039b6>g</font> <font color=#30a72f>l</font> <font color=#c41200>e</font></b> automatycznie generuje wersję html dokumentu podczas indeksowania Sieci.<br>Aby utworzyć łącze lub zakładkę do tej strony, użyj następującego adresu url: <code>http://www.google.com/search?q=cache:qMkAa6Imy5gJ:hem.bredband.net/b106676/llusoft/download/pdb_file_structure.doc+pdb+header+format&amp;hl=pl&amp;client=firefox-a</code></font><br><br><center><font size=-2><i>Google nie jest w żaden sposób związany z autorami tej strony i nie odpowiada za jej treść.</i></font></center></td></tr>
+<tr><td>
+<table border=0 cellpadding=0 cellspacing=0><tr><td><font face=arial,sans-serif color=black size=-1>Znalezione słowa zostały podświetlone:&nbsp;</font></td><td bgcolor=#ffff66><B><font face=arial,sans-serif color=black size=-1>pdb&nbsp;</font></B></td><td bgcolor=#A0FFFF><B><font face=arial,sans-serif color=black size=-1>header&nbsp;</font></B></td><td bgcolor=#99ff99><B><font face=arial,sans-serif color=black size=-1>format&nbsp;</font></B></td></tr></table>
+</td></tr></table></td></tr></table>
+<hr>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+<title>Header structure
+</title>
+</head>
+
+<body>
+
+  <p align="center"><font size="5" face="Times New Roman"><B style="color:black;background-color:#ffff66">PDB</B> File structure</font>&nbsp;<br />
+</p>
+<p><font size="5" face="Times New Roman">Contents</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<font size="5" face="Times New Roman"><B style="color:black;background-color:#ffff66">PDB 
+</B><B style="color:black;background-color:#A0FFFF">header</B> structure&nbsp;&nbsp;&nbsp;Page 2</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<font size="5" face="Times New Roman">Record 
+<B style="color:black;background-color:#A0FFFF">header</B> structure&nbsp; &nbsp;&nbsp;Page 3</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<font size="5" face="Times New Roman">Assembling 
+the file &nbsp;&nbsp;&nbsp;Page 3</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<font size="5" face="Times New Roman">Record 
+data (PDA Toolbox <B style="color:black;background-color:#99ff99">format</B>)&nbsp;&nbsp;Page 4</font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font
+ size="3" face="Times New Roman">Data data <B style="color:black;background-color:#A0FFFF">header</B></font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font
+ size="3" face="Times New Roman">Field <B style="color:black;background-color:#A0FFFF">header</B></font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font
+ size="3" face="Times New Roman">Digital Ink <B style="color:black;background-color:#A0FFFF">header</B></font></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font
+ size="3" face="Times New Roman">Assembling the record data</font>&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+</p>
+<h2><font size="5" face="Times New Roman"><B style="color:black;background-color:#A0FFFF">Header</B> structure</font></h2>
+<a name="table01"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Field</font></td>
+  <td width="7%"><h1 align="center"><font size="3" face="Times New Roman">Bytes</font></td>
+  <td width="21%"><p><font size="3" face="Times New Roman">Type</font></td>
+  <td width="48%"><p><font size="3" face="Times New Roman">Notes</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Name</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">32</font></td>
+  <td><p><font size="2" face="Times New Roman">Null terminated string</font></td>
+  <td><p><font size="2" face="Times New Roman">This is the name of the 
+  database on the palm device.</font></p>
+  <p><font size="2" face="Times New Roman">It need not match the name 
+  of the <B style="color:black;background-color:#ffff66">PDB</B> file in the environment in which it is created.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">File Attributes</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">0x0002 Read-Only</font>&nbsp;<br />
+  </p>
+  <p><font size="2" face="Times New Roman">0x0004 Dirty AppInfoArea</font>&nbsp;<br />
+  </p>
+  <p><font size="2" face="Times New Roman">0x0008 Backup this Database</font>&nbsp;<br />
+  </p>
+  <p><font size="2" face="Times New Roman">0x0010 (16 decimal) Okay to 
+  install newer over&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; existing copy, if present 
+  on Palm</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">0x0020 (32 decimal) Force the 
+  Pilot to reset after this database is installed</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">0x0040 (64 decimal) Dont allow 
+  copy of file to be beamed to other Palm.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Version</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Defined by the application</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Creation 
+  Date</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Expressed as the number 
+  of seconds since januari 1,1904 (Palm OS 3.0 and newer)</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Modification 
+  Date</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Expressed as the number 
+  of seconds since January 1,1904 (Palm OS 3.0 and newer)</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Last Backup 
+  Date</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Expressed as the number 
+  of seconds since January 1,1904 (Palm OS 3.0 and newer)</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Modification 
+  Number</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Set to zero</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">AppInfoArea</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The byte number in the 
+  <B style="color:black;background-color:#ffff66">PDB</B> file (counting from zero) at which the AppInfoArea is located. This 
+  must be the first entry in the data portion of the <B style="color:black;background-color:#ffff66">PDB</B> file. If this 
+  database does not have a AppInfoArea, set this value to zero.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">SortInfoArea</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The byte number in the 
+  <B style="color:black;background-color:#ffff66">PDB</B> file (counting from zero) at which the SortInfoArea is located. 
+  This must be placed immediately after the AppInfoArea, if one exists, 
+  within the data portion of the <B style="color:black;background-color:#ffff66">PDB</B> file. If this database does not have 
+  a SortInfoArea, set this value to zero. Do not use this</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Database 
+  Type</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">String</font></td>
+  <td><p><font size="2" face="Times New Roman">Set this to the desired 
+  value. Generally it should match the Database type used by the corresponding 
+  application. This is 4 character long and does not have a terminating 
+  zero.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Creator 
+  ID</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">String</font></td>
+  <td><p><font size="2" face="Times New Roman">Set this to the desired 
+  value. Generally it should match the Creator ID used by the corresponding 
+  application. In all cases, you should always register you Creator ID 
+  before using it. This is 4 character long and does not have a terminating 
+  zero.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Unique 
+  ID Seed</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">This is used to generate 
+  the Unique ID number of subsequent records. This should be set to zero.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">NextRecordList 
+  ID</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Set this to zero. The element 
+  is used only in the in memory representation of a <B style="color:black;background-color:#ffff66">PDB</B> file, but exists 
+  in the external version for consistency.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Number 
+  of Records</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">This contains the number 
+  of records.</font></td></tr>
+</table>
+</div>
+&nbsp;<br />
+<p><font size="3" face="Times New Roman">
+Record <B style="color:black;background-color:#A0FFFF">header</B></font></p>
+<a name="table02"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Field</font></td>
+  <td width="7%"><h1 align="center"><font size="3" face="Times New Roman">Bytes</font></td>
+  <td width="21%"><p><font size="3" face="Times New Roman">Type</font></td>
+  <td width="48%"><p><font size="3" face="Times New Roman">Notes</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Record 
+  Data Offset</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The byte number in the 
+  <B style="color:black;background-color:#ffff66">PDB</B> file (counting from zero) at which the record is located.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Record 
+  Attributes</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">1</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">0x10 (16 decimal) Secret 
+  record bit</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">0x20 (32 decimal) Record in 
+  use (busy bit)</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">0x40 (64 decimal) Dirty record 
+  bit.</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">0x80 (128, unsigned decimal) 
+  Delete record on next HotSync</font>&nbsp;<br /></p>
+  <p><font size="2" face="Times New Roman">The lest significant four bits 
+  are used to represent the category values.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Unique 
+  ID</font></td>
+  <td><p align="center"><font size="2" face="Times New Roman">3</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Set this to zero and do 
+  not try to second-guess what PalmOS will do whit this value. </font>
+  </td></tr>
+</table>
+</div>
+<h2><font size="5" face="Times New Roman">Assembling the file</font></h2>
+<a name="table03"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Area</font></td>
+  <td width="77%"><p><font size="3" face="Times New Roman">Description</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Database 
+  <B style="color:black;background-color:#A0FFFF">Header</B></font></td>
+  <td><p><font size="2" face="Times New Roman">The complete <B style="color:black;background-color:#A0FFFF">header </B><B style="color:black;background-color:#99ff99">format</B>, 
+  as described above (78 bytes)</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Record 
+  List</font></td>
+  <td><p><font size="2" face="Times New Roman">Must contain at atleast 
+  one entry (Record headers)</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Filler</font></td>
+  <td><p><font size="2" face="Times New Roman">Upon transferring a database 
+  from the Palm to the desktop environment, the <B style="color:black;background-color:#ffff66">PDB</B> file will have two 
+  bytes of filler here. It does not appear to be necessary to insert these 
+  two bytes here when creating a <B style="color:black;background-color:#ffff66">PDB</B> file for installation on the Palm. 
+  However, if you read a <B style="color:black;background-color:#ffff66">PDB</B> file created by the backup conduit (setting 
+  the backup bit), you will find that there are two bytes of data in this 
+  location.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Data Area</font></td>
+  <td><p><font size="2" face="Times New Roman">It must be in this order: 
+  AppInfoArea (if present), SortInfoArea (if present), and records, sequentially. 
+  The order is important because each elements size is computed based 
+  on the location of the following element.</font></td></tr>
+</table>
+</div>
+&nbsp;<br />&nbsp;<br />
+<h2><font size="3" face="Times New Roman">* Note. The processor on a 
+Palm device is based on Motorola 68000 family and it uses big endian 
+(most significant byte first) and Intel processors uses little endian 
+(least significant byte first).</font><font size="5" face="Times New Roman">&nbsp;<br />
+Record Data</font></h2>
+<p><font size="2" face="Times New Roman">The Record data is saved in 
+a binary <B style="color:black;background-color:#99ff99">format</B> and how the is assembled differs from application to 
+application.</font>&nbsp;<br /></p>
+<p><font size="2" face="Times New Roman">Here is the record data structure 
+for a <B style="color:black;background-color:#ffff66">PDB</B> file created from a database that is created with a PDAToolbox 
+application. The <B style="color:black;background-color:#ffff66">PDB</B> file created from a PDAToolbox database doesnt 
+have any AppInfoArea and SortInfoArea and the number of fields and the 
+order of the fields can differ from record to record.</font></p>
+&nbsp;<br />
+<h2><font size="3" face="Times New Roman">* Note. The processor on a 
+Palm device is based on Motorola 68000 family and it uses big endian 
+(most significant byte first) and Intel processors uses little endian 
+(least significant byte first).</font><font size="5" face="Times New Roman">&nbsp;<br />
+Record Data</font></h2>
+<p><font size="2" face="Times New Roman">The Record data is saved in 
+a binary <B style="color:black;background-color:#99ff99">format</B> and how the is assembled differs from application to 
+application.</font>&nbsp;<br /></p>
+<p><font size="2" face="Times New Roman">Here is the record data structure 
+for a <B style="color:black;background-color:#ffff66">PDB</B> file created from a database that is created with a PDAToolbox 
+application. The <B style="color:black;background-color:#ffff66">PDB</B> file created from a PDAToolbox database doesnt 
+have any AppInfoArea and SortInfoArea and the number of fields and the 
+order of the fields can differ from record to record.</font>&nbsp;<br />
+</p>
+<h4><font size="3" face="Times New Roman">Record Data <B style="color:black;background-color:#A0FFFF">header</B></font></h4>
+<a name="table04"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Field</font></td>
+  <td width="7%"><h1 align="center"><font size="3" face="Times New Roman">Bytes</font></td>
+  <td width="21%"><p><font size="3" face="Times New Roman">Type</font></td>
+  <td width="48%"><p><font size="3" face="Times New Roman">Notes</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Number 
+  of Fields</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Number of Fields in the 
+  record, each record can contain different number of records.</font></td></tr>
+</table>
+</div>
+<h4><font size="3" face="Times New Roman">Field <B style="color:black;background-color:#A0FFFF">Header</B></font></h4>
+<a name="table05"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Field</font></td>
+  <td width="7%"><h1 align="center"><font size="3" face="Times New Roman">Bytes</font></td>
+  <td width="21%"><p><font size="3" face="Times New Roman">Type</font></td>
+  <td width="48%"><p><font size="3" face="Times New Roman">Notes</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Field 
+  Name</font></td>
+  <td><p><font size="2" face="Times New Roman">4</font></td>
+  <td><p><font size="2" face="Times New Roman">String</font></td>
+  <td><p><font size="2" face="Times New Roman">Name of the field, This 
+  is 4 character long and does not have a terminating zero</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Field 
+  Type</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">0 String</font></p>
+  <p><font size="2" face="Times New Roman">1 Boolean</font></p>
+  <p><font size="2" face="Times New Roman">2 Date, number of days since 
+  January 1 1904</font></p>
+  <p><font size="2" face="Times New Roman">3 Time, number of minutes since 
+  midnight</font></p>
+  <p><font size="2" face="Times New Roman">5 Digital Ink</font></p>
+  <p><font size="2" face="Times New Roman">6 Alarm, number of seconds 
+  since January 1 1904</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Field 
+  Size</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The size of the field in 
+  bytes. The size depends on the Field Type.</font></p>
+  <p><font size="2" face="Times New Roman">String: Length of the text, 
+  the size is always even so if the actually length is odd an extra byte 
+  is added.</font></p>
+  <p><font size="2" face="Times New Roman">Boolean: 2 bytes.</font></p>
+  <p><font size="2" face="Times New Roman">Date: 4 bytes.</font></p>
+  <p><font size="2" face="Times New Roman">Time 4 Bytes.</font></p>
+  <p><font size="2" face="Times New Roman">Digital Ink: Size of the image 
+  plus a 16 bytes <B style="color:black;background-color:#A0FFFF">header</B>**</font></p>
+  <p><font size="2" face="Times New Roman">Alarm: 4 Bytes</font></td></tr>
+</table>
+</div>
+&nbsp;<br />
+<p><font size="3" face="Times New Roman">** The Digital Ink <B style="color:black;background-color:#A0FFFF">header</B> (standard 
+Palm bitmap <B style="color:black;background-color:#A0FFFF">header</B>)</font></p>
+<a name="table06"></a>
+<div align="left">
+<table width="609" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Field</font></td>
+  <td width="7%"><p><font size="3" face="Times New Roman">Bytes</font></td>
+  <td width="21%"><p><font size="3" face="Times New Roman">Type</font></td>
+  <td width="48%"><p><font size="3" face="Times New Roman">Notes</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Width</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Width in pixel of image.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Height</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Height in pixel of image.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">BytesPerRow</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The number of bytes for 
+  each row in the image.</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">BitmapsFlags</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">1 Compressed</font></p>
+  <p><font size="2" face="Times New Roman">2 HasColorTable</font></p>
+  <p><font size="2" face="Times New Roman">4 HasTransparency</font></p>
+  <p><font size="2" face="Times New Roman">8 inderect</font></p>
+  <p><font size="2" face="Times New Roman">16 for screen</font></p>
+  <p><font size="2" face="Times New Roman">This field is not used for 
+  Dinks</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">PixelSize</font></td>
+  <td><p><font size="2" face="Times New Roman">1</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The pixel depth Currently 
+  supported pixel depths are 1, 2, 4, and 8-bit. </font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Version</font></td>
+  <td><p><font size="2" face="Times New Roman">1</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">The version of bitmap encoding 
+  used</font></p>
+  <p><font size="2" face="Times New Roman">0 Bitmap encoding PalmOS v1, </font></p>
+  <p><font size="2" face="Times New Roman">1 Bitmap encoding PalmOS v3</font></p>
+  <p><font size="2" face="Times New Roman">2 Bitmap encoding PalmOS v3.5</font></p>
+  <p><font size="2" face="Times New Roman">This must be set to 0</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">nextDepthOffset</font></td>
+  <td><p><font size="2" face="Times New Roman">2</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Not used set to 0</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">transparentIndex</font></td>
+  <td><p><font size="2" face="Times New Roman">1</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Not used set to 0</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">compressionType</font></td>
+  <td><p><font size="2" face="Times New Roman">1</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Not used set to 0</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">reserved</font></td>
+  <td><p><font size="2" face="Times New Roman">8</font></td>
+  <td><p><font size="2" face="Times New Roman">Numeric*</font></td>
+  <td><p><font size="2" face="Times New Roman">Reserved set to 0</font></td></tr>
+</table>
+</div>
+<h4><font size="3" face="Times New Roman">Assembling the Record Data 
+(PDAToolbox database)</font></h4>
+<a name="table07"></a>
+<div align="left">
+<table width="614" border="2" cellspacing="0">
+<tr valign="top"><td width="22%"><p><font size="3" face="Times New Roman">Area</font></td>
+  <td width="77%"><p><font size="3" face="Times New Roman">Description</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Record 
+  Data <B style="color:black;background-color:#A0FFFF">Header</B></font></td>
+  <td><font size="2" face="Times New Roman">&nbsp;</font></td></tr>
+<tr valign="top"><td><p><font size="2" face="Times New Roman">Field 
+  Headers</font></td>
+  <td><p><font size="2" face="Times New Roman">Field 1 to n</font></td></tr>
+<tr valign="top"><td height="8"><p><font size="2" face="Times New Roman">Data 
+  Area</font></td>
+  <td><p><font size="2" face="Times New Roman">Data for field 1 to n</font></td></tr>
+</table>
+</div>
+
+
+</body>
+</html>
