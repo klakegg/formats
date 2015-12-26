@@ -1,4 +1,4 @@
-package net.klakegg.palmformat;
+package net.klakegg.formats.palm;
 
 import com.google.common.primitives.Ints;
 

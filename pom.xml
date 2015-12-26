@@ -13,12 +13,14 @@
 
     <modules>
         <module>formats-palm</module>
+        <module>formats-mobi</module>
+        <module>formats-test</module>
     </modules>
 
     <properties>
         <guava.version>19.0</guava.version>
         <java.encoding>UTF-8</java.encoding>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <slf4j.version>1.7.13</slf4j.version>
     </properties>
 
@@ -32,23 +34,42 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.13</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Formats -->
+            <dependency>
+                <groupId>net.klakegg.formats</groupId>
+                <artifactId>formats-palm</artifactId>
+                <version>0.8.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.klakegg.formats</groupId>
+                <artifactId>formats-test</artifactId>
+                <version>0.8.0-SNAPSHOT</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Logging -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.13</version>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
 
+            <!-- Google -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>19.0</version>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

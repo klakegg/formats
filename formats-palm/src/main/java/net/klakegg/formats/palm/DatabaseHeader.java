@@ -1,8 +1,8 @@
-package net.klakegg.palmformat;
+package net.klakegg.formats.palm;
 
 import java.util.Date;
 
-class DatabaseHeader {
+public class DatabaseHeader {
 
     private String name;
     private short attributes;

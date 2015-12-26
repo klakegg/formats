@@ -9,27 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>formats-palm</artifactId>
+    <artifactId>formats-mobi</artifactId>
 
-    <name>Formats :: Palm</name>
+    <name>Formats :: Mobi</name>
 
     <dependencies>
         <!-- Formats -->
         <dependency>
             <groupId>net.klakegg.formats</groupId>
+            <artifactId>formats-palm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.klakegg.formats</groupId>
             <artifactId>formats-test</artifactId>
         </dependency>
 
-        <!-- Logging -->
-        <!-- <dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-        </dependency> -->
-
-        <!-- Google -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
 
