@@ -1,8 +1,11 @@
 package net.klakegg.palmformat;
 
+import com.google.common.io.ByteStreams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Deque;
@@ -35,8 +38,16 @@ public class PalmReader {
         RecordEntry entry;
         while ((entry = entries.poll()) != null) {
             logger.info("{}", entry);
-            byte[] b = readBytes(inputStream, entries.peek().getDataOffset() - entry.getDataOffset());
-            logger.info("{}", new String(b));
+
+            byte[] data;
+            if (entries.peek() == null) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                ByteStreams.copy(inputStream, byteArrayOutputStream);
+                data = byteArrayOutputStream.toByteArray();
+            } else {
+                data = readBytes(inputStream, entries.peek().getDataOffset() - entry.getDataOffset());
+            }
+            logger.info("{}", new String(data));
         }
     }
 
