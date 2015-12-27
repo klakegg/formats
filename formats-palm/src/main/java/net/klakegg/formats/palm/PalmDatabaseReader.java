@@ -17,8 +17,6 @@ public class PalmDatabaseReader implements Iterable<Entry>, Iterator<Entry>, Clo
     private DatabaseHeader header;
     private Deque<Record> entries = new LinkedList<>();
 
-    private int counter = 0;
-
     /**
      * Initiating reading of database.
      *
@@ -102,6 +100,8 @@ public class PalmDatabaseReader implements Iterable<Entry>, Iterator<Entry>, Clo
         header = null;
         entries = null;
     }
+
+    private int counter = 0;
 
     byte[] readBytes(InputStream inputStream, int size) throws IOException {
         byte[] bytes = new byte[size];

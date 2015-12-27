@@ -19,8 +19,6 @@ public class MobiReaderTest {
         logger.info("{}", mobiReader.getMobiHeader());
         logger.info("{}", mobiReader.getExthHeader());
 
-        if (mobiReader.hasNext())
-            logger.info(new String(mobiReader.next().getBytes()));
-
+        logger.info("{}", mobiReader.getContent());
     }
 }

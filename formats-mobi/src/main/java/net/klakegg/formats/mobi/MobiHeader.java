@@ -4,6 +4,8 @@ import net.klakegg.formats.mobi.code.Encryption;
 import net.klakegg.formats.mobi.code.Type;
 import net.klakegg.formats.palm.PalmUtils;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class MobiHeader {
@@ -11,7 +13,7 @@ public class MobiHeader {
     private Encryption encryption;
     private int headerLength;
     private Type type;
-    private int encoding;
+    private Charset encoding;
     private int uniqueId;
     private int fileVersion;
     private int fileVersionMin;
@@ -28,7 +30,17 @@ public class MobiHeader {
         encryption = Encryption.findByIdentifier(PalmUtils.readShort(bytes, 12));
         headerLength = PalmUtils.readInt(bytes, 20);
         type = Type.findByIdentifier(PalmUtils.readInt(bytes, 24));
-        encoding = PalmUtils.readInt(bytes, 28);
+
+        switch (PalmUtils.readInt(bytes, 28)) {
+            case 1252:
+                // Set CP1252
+                encoding = StandardCharsets.US_ASCII;
+                break;
+            case 65001:
+                encoding = StandardCharsets.UTF_8;
+                break;
+        }
+
         uniqueId = PalmUtils.readInt(bytes, 32);
         fileVersion = PalmUtils.readInt(bytes, 36);
         fileVersionMin = PalmUtils.readInt(bytes, 104);
@@ -66,7 +78,7 @@ public class MobiHeader {
         return type;
     }
 
-    public int getEncoding() {
+    public Charset getEncoding() {
         return encoding;
     }
 

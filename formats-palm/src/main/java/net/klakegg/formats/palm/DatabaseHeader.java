@@ -18,9 +18,6 @@ public class DatabaseHeader {
     private String uniqueIDSeed;
 
     DatabaseHeader(byte[] bytes) {
-        if (bytes.length != 72)
-            throw new RuntimeException("Invalid amount of bytes.");
-
         this.name = PalmUtils.readString(bytes, 0, 31).trim();
         this.attributes = PalmUtils.readShort(bytes, 32);
         this.version = PalmUtils.readShort(bytes, 34);
