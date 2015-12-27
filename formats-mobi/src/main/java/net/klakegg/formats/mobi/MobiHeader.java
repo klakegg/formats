@@ -6,7 +6,6 @@ import net.klakegg.formats.palm.PalmUtils;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 public class MobiHeader {
 
@@ -70,7 +69,7 @@ public class MobiHeader {
         return encryption;
     }
 
-    public int getHeaderLength() {
+    int getHeaderLength() {
         return headerLength;
     }
 
@@ -98,19 +97,19 @@ public class MobiHeader {
         return name;
     }
 
-    public HuffmanRecord getHuffmanRecord() {
+    HuffmanRecord getHuffmanRecord() {
         return huffmanRecord;
     }
 
-    public int getFirstImageIndex() {
+    int getFirstImageIndex() {
         return firstImageIndex;
     }
 
-    public int getFirstNonBookIndex() {
+    int getFirstNonBookIndex() {
         return firstNonBookIndex;
     }
 
-    public byte[] getExthFlag() {
+    byte[] getExthFlag() {
         return exthFlag;
     }
 
@@ -118,17 +117,12 @@ public class MobiHeader {
     public String toString() {
         return "MobiHeader{" +
                 "encryption=" + encryption +
-                ", headerLength=" + headerLength +
                 ", type=" + type +
                 ", encoding=" + encoding +
                 ", uniqueId=" + uniqueId +
                 ", fileVersion=" + fileVersion +
                 ", fileVersionMin=" + fileVersionMin +
                 ", name='" + name + '\'' +
-                ", huffmanRecord=" + huffmanRecord +
-                ", firstImageIndex=" + firstImageIndex +
-                ", firstNonBookIndex=" + firstNonBookIndex +
-                ", exthFlag=" + Arrays.toString(exthFlag) +
                 '}';
     }
 }

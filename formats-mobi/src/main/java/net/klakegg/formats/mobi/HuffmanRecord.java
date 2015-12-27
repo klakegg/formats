@@ -1,6 +1,6 @@
 package net.klakegg.formats.mobi;
 
-public class HuffmanRecord {
+class HuffmanRecord {
 
     private int recordOffset;
     private int recordCount;

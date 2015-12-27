@@ -12,9 +12,6 @@ public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
         super(inputStream);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Entry next() {
         // Throw exception if close() is called.

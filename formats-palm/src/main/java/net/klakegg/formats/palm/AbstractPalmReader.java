@@ -45,33 +45,21 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
         return header;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Iterator<T> iterator() {
         return this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean hasNext() {
         return entries != null && entries.peek() != null;
     }
 
-    /**
-     * Not implemented.
-     */
     @Override
     public void remove() {
         // Not implemented.
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() throws IOException {
         // Simply remove pointers.

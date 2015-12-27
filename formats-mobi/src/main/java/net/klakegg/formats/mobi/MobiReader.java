@@ -5,16 +5,12 @@ import net.klakegg.formats.palm.DatabaseHeader;
 import net.klakegg.formats.palm.PalmDatabaseReader;
 import net.klakegg.formats.palm.PalmDocHeader;
 import net.klakegg.formats.palm.PalmUtils;
-import net.klakegg.formats.palm.compression.PalmDocCompression;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class MobiReader {
-
-    private static Logger logger = LoggerFactory.getLogger(MobiReader.class);
 
     private PalmDatabaseReader palmDatabaseReader;
 
@@ -25,28 +21,37 @@ public class MobiReader {
     private String content;
 
     public MobiReader(InputStream inputStream) throws IOException {
+        // Open content as Palm Database (PDB).
         this.palmDatabaseReader = new PalmDatabaseReader(inputStream);
 
+        // Certain values indicate the file to be a mobi file.
         if (!"BOOK".equals(palmDatabaseReader.getHeader().getType()) || !"MOBI".equals(palmDatabaseReader.getHeader().getCreator()))
             throw new IllegalStateException("Invalid metadata in database header for mobi format.");
 
+        // Mobi files must minimum contain header record.
         if (!palmDatabaseReader.hasNext())
             throw new IllegalStateException("No records found.");
 
+        // Fetch first record as this contains header.
         byte[] header = palmDatabaseReader.next().getBytes();
+
+        // Create PalmDOC header.
         palmDocHeader = new PalmDocHeader(header);
+
+        // Create MOBI header.
         mobiHeader = new MobiHeader(header);
 
-        if ("EXTH".equals(PalmUtils.readString(header, 16 + mobiHeader.getHeaderLength(), 4))) {
-            exthHeader = new ExthHeader(PalmUtils.readPart(header, 16 + mobiHeader.getHeaderLength(), header.length - 16 - mobiHeader.getHeaderLength()));
-        }
+        // Read EXTH header if found
+        if ("EXTH".equals(PalmUtils.readString(header, 16 + mobiHeader.getHeaderLength(), 4)))
+            exthHeader = new ExthHeader(PalmUtils.readPart(header, 16 + mobiHeader.getHeaderLength(), PalmUtils.readInt(header, 16 + mobiHeader.getHeaderLength() + 4)));
 
+        // Fetch content
         if (mobiHeader.getEncryption().equals(Encryption.NONE)) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < mobiHeader.getFirstNonBookIndex() - 2; i++)
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            for (int i = 0; i < mobiHeader.getFirstNonBookIndex(); i++) // TODO Reads too far.
                 if (palmDatabaseReader.hasNext())
-                    stringBuilder.append(new String(PalmDocCompression.decompress(palmDatabaseReader.next().getBytes()), mobiHeader.getEncoding()));
-            content = stringBuilder.toString();
+                    byteArrayOutputStream.write(palmDatabaseReader.next().getBytes());
+            content = new String(palmDocHeader.getCompression().decompress(byteArrayOutputStream.toByteArray()), mobiHeader.getEncoding()).trim();
         }
 
         // while (palmDatabaseReader.hasNext())
@@ -71,7 +76,7 @@ public class MobiReader {
 
     public String getContent() {
         if (content == null)
-            throw new IllegalStateException("Encryption not supported.");
+            throw new IllegalStateException("Encrypted content is not supported.");
 
         return content;
     }

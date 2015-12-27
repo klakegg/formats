@@ -1,14 +1,20 @@
 package net.klakegg.formats.palm.code;
 
-public enum Compression {
-    NONE(1),
-    PalmDOC(2),
-    HUFF_CDIC(17480);
+import net.klakegg.formats.palm.compression.CompressionAlgorithm;
+import net.klakegg.formats.palm.compression.NoCompression;
+import net.klakegg.formats.palm.compression.PalmDocCompression;
+
+public enum Compression implements CompressionAlgorithm {
+    NONE(1, new NoCompression()),
+    PalmDOC(2, new PalmDocCompression()),
+    HUFF_CDIC(17480, null);
 
     private int identifier;
+    private CompressionAlgorithm algorithm;
 
-    Compression(int identifier) {
+    Compression(int identifier, CompressionAlgorithm algorithm) {
         this.identifier = identifier;
+        this.algorithm = algorithm;
     }
 
     public static Compression findByIdentifier(int identifier) {
@@ -17,5 +23,10 @@ public enum Compression {
                 return compression;
 
         return null;
+    }
+
+    @Override
+    public byte[] decompress(byte[] bytes) {
+        return algorithm.decompress(bytes);
     }
 }
