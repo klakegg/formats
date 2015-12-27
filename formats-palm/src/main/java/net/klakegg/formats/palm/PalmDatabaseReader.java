@@ -10,12 +10,12 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class PalmReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
+public class PalmDatabaseReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
 
     private InputStream inputStream;
 
     private DatabaseHeader header;
-    private Deque<RecordEntry> entries = new LinkedList<>();
+    private Deque<Record> entries = new LinkedList<>();
 
     private int counter = 0;
 
@@ -25,7 +25,7 @@ public class PalmReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
      * @param inputStream Stream of data.
      * @throws IOException
      */
-    public PalmReader(InputStream inputStream) throws IOException {
+    public PalmDatabaseReader(InputStream inputStream) throws IOException {
         this.inputStream = inputStream;
 
         // Read header
@@ -38,7 +38,7 @@ public class PalmReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
 
         // Read record entries.
         for (int i = 1; i <= PalmUtils.readShort(bytes, 4); i++)
-            entries.add(new RecordEntry(readBytes(inputStream, 8)));
+            entries.add(new Record(readBytes(inputStream, 8)));
 
         // Align inputStream to read first entry in database.
         if (counter < entries.peek().getDataOffset())
@@ -71,8 +71,8 @@ public class PalmReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
             throw new IllegalStateException("Unable to read after close.");
 
         // Fetch next record entry.
-        RecordEntry entry = entries.poll();
-        if (entry == null)
+        Record record = entries.poll();
+        if (record == null)
             return null;
 
         try {
@@ -80,10 +80,10 @@ public class PalmReader implements Iterable<Entry>, Iterator<Entry>, Closeable {
                 // Read to end of file as there are no more entries after this.
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 ByteStreams.copy(inputStream, byteArrayOutputStream);
-                return new Entry(byteArrayOutputStream.toByteArray());
+                return new Entry(record, byteArrayOutputStream.toByteArray());
             } else {
                 // Read next entry.
-                return new Entry(readBytes(inputStream, entries.peek().getDataOffset() - entry.getDataOffset()));
+                return new Entry(record, readBytes(inputStream, entries.peek().getDataOffset() - record.getDataOffset()));
             }
         } catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);

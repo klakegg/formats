@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-class PalmUtils {
+public class PalmUtils {
 
     private static byte[] emptyDate = new byte[]{0, 0, 0, 0};
     private static Calendar rootDate = new GregorianCalendar(1904, 0, 1, 0, 0);

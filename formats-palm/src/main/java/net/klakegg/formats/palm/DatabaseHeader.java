@@ -17,7 +17,7 @@ public class DatabaseHeader {
     private String creator;
     private String uniqueIDSeed;
 
-    public DatabaseHeader(byte[] bytes) {
+    DatabaseHeader(byte[] bytes) {
         if (bytes.length != 72)
             throw new RuntimeException("Invalid amount of bytes.");
 
@@ -85,16 +85,16 @@ public class DatabaseHeader {
 
     @Override
     public String toString() {
-        return "PalmHeader{" +
+        return "DatabaseHeader{" +
                 "name='" + name + '\'' +
-                ", attributes='" + attributes + '\'' +
-                ", version='" + version + '\'' +
+                ", attributes=" + attributes +
+                ", version=" + version +
                 ", creationDate=" + creationDate +
                 ", modificationDate=" + modificationDate +
                 ", lastBackupDate=" + lastBackupDate +
                 ", modificationNumber=" + modificationNumber +
-                ", appInfoID='" + appInfoID + '\'' +
-                ", sortInfoID='" + sortInfoID + '\'' +
+                ", appInfoID=" + appInfoID +
+                ", sortInfoID=" + sortInfoID +
                 ", type='" + type + '\'' +
                 ", creator='" + creator + '\'' +
                 ", uniqueIDSeed='" + uniqueIDSeed + '\'' +

@@ -7,13 +7,13 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class PalmReaderTest {
+public class PalmDatabaseReaderTest {
 
-    private static Logger logger = LoggerFactory.getLogger(PalmReaderTest.class);
+    private static Logger logger = LoggerFactory.getLogger(PalmDatabaseReaderTest.class);
 
     @Test
     public void simple() throws IOException {
-        PalmReader reader = new PalmReader(getClass().getResourceAsStream("/mobi/dukkehjem.mobi"));
+        PalmDatabaseReader reader = new PalmDatabaseReader(getClass().getResourceAsStream("/mobi/dukkehjem.mobi"));
         logger.info("{}", reader.getHeader());
 
         int counter = 0;
