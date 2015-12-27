@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/klakegg/formats.svg?branch=master)](https://travis-ci.org/klakegg/formats)
+
 # Formats
 
 | Format                     | Module       | Supports read | Supports write |
