@@ -18,10 +18,36 @@ public class PalmDatabaseReaderTest {
 
         int counter = 0;
         for (Entry entry : reader) {
-            logger.info("{}", entry.getBytes());
+            // logger.info("{}", entry.getBytes());
             counter++;
         }
 
         Assert.assertEquals(counter, 87);
+
+        Assert.assertFalse(reader.hasNext());
+        Assert.assertNull(reader.next());
+
+        try {
+            reader.remove();
+            reader.remove();
+        } catch (Exception e) {
+            Assert.fail("remove() should always be silent.");
+        }
+
+        try {
+            reader.close();
+            reader.close();
+        } catch (Exception e) {
+            Assert.fail("close() should always be silent.");
+        }
+
+        Assert.assertFalse(reader.hasNext());
+
+        try {
+            reader.next();
+            Assert.fail("Calling next() after close() should result in Exception.");
+        } catch (Exception e) {
+            // No action.
+        }
     }
 }

@@ -12,8 +12,10 @@ public class PalmDocCompression {
 
         int i = 0;
         while (i < bytes.length) {
-            // Read a byte from the compressed stream. If the byte is
+            // Read a byte from the compressed stream.
             int b = bytes[i] & 0x00FF;
+
+            // If the byte is
 
             // 0x00: "1 literal" copy that byte unmodified to the decompressed stream.
             if (b == 0x0) {

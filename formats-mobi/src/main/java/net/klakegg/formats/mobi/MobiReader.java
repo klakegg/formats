@@ -43,7 +43,7 @@ public class MobiReader {
 
         if (mobiHeader.getEncryption().equals(Encryption.NONE)) {
             StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < mobiHeader.getFirstNonBookIndex() - 1; i++)
+            for (int i = 0; i < mobiHeader.getFirstNonBookIndex() - 2; i++)
                 if (palmDatabaseReader.hasNext())
                     stringBuilder.append(new String(PalmDocCompression.decompress(palmDatabaseReader.next().getBytes()), mobiHeader.getEncoding()));
             content = stringBuilder.toString();
