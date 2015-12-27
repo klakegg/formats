@@ -48,7 +48,7 @@ public class MobiReader {
         // Fetch content
         if (mobiHeader.getEncryption().equals(Encryption.NONE)) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            for (int i = 0; i < mobiHeader.getFirstNonBookIndex(); i++) // TODO Reads too far.
+            for (int i = 0; i < mobiHeader.getFirstNonBookIndex() - 2; i++)
                 if (palmDatabaseReader.hasNext())
                     byteArrayOutputStream.write(palmDatabaseReader.next().getBytes());
             content = new String(palmDocHeader.getCompression().decompress(byteArrayOutputStream.toByteArray()), mobiHeader.getEncoding()).trim();
