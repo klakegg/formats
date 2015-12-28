@@ -15,7 +15,6 @@ public class Kf8Test {
     public void simple() throws IOException {
         MobiReader mobiReader = new MobiReader(getClass().getResourceAsStream("/kf8/KF8Sample.mobi"));
 
-        logger.info("{}", mobiReader.getDatabaseHeader());
         logger.info("{}", mobiReader.getExthHeader());
 
         for (DocumentContent documentContent : mobiReader.getDocuments()) {

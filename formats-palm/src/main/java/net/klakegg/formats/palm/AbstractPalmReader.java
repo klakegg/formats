@@ -13,7 +13,8 @@ import java.util.LinkedList;
 
 abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closeable {
 
-    protected InputStream inputStream;
+    private InputStream inputStream;
+    private BufferedInputStream bufferedInputStream;
 
     protected PalmDatabaseHeader header;
     protected Deque<Record> entries = new LinkedList<>();
@@ -25,21 +26,21 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
      * @throws IOException
      */
     public AbstractPalmReader(InputStream inputStream) throws IOException {
-        if (!(inputStream instanceof BufferedInputStream))
-            inputStream = new BufferedInputStream(inputStream);
         this.inputStream = inputStream;
+        if (!(inputStream instanceof BufferedInputStream))
+            this.bufferedInputStream = new BufferedInputStream(inputStream);
 
         // Read meta
-        this.header = new PalmDatabaseHeader(readBytes(inputStream, 72));
+        this.header = new PalmDatabaseHeader(readBytes(72));
 
         // Make sure to read files containing only one record list.
-        ByteArrayReader reader = new ByteArrayReader(readBytes(inputStream, 6));
+        ByteArrayReader reader = new ByteArrayReader(readBytes(6));
         if (reader.getShort(0) != 0)
             throw new RuntimeException("Multiple record lists not supported.");
 
         // Read record entries.
         for (int i = 1; i <= reader.getShort(4); i++)
-            entries.add(new Record(readBytes(inputStream, 8)));
+            entries.add(new Record(readBytes(8)));
     }
 
     /**
@@ -68,7 +69,11 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
 
     @Override
     public void close() throws IOException {
+        if (bufferedInputStream != null)
+            bufferedInputStream.close();
+
         // Simply remove pointers.
+        bufferedInputStream = null;
         inputStream = null;
         header = null;
         entries = null;
@@ -76,9 +81,13 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
 
     protected int byteCounter = 0;
 
-    protected byte[] readBytes(InputStream inputStream, int size) throws IOException {
+    protected InputStream getInputStream() {
+        return bufferedInputStream != null ? bufferedInputStream : inputStream;
+    }
+
+    protected byte[] readBytes(int size) throws IOException {
         byte[] bytes = new byte[size];
-        inputStream.read(bytes);
+        getInputStream().read(bytes);
         byteCounter += bytes.length;
         return bytes;
     }

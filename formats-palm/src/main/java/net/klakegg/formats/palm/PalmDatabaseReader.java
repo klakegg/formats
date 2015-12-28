@@ -26,16 +26,16 @@ public class PalmDatabaseReader extends AbstractPalmReader<Record> {
         try {
             // Align inputStream to read first entry in database.
             if (byteCounter < record.getDataOffset())
-                readBytes(inputStream, record.getDataOffset() - byteCounter);
+                readBytes(record.getDataOffset() - byteCounter);
 
             if (entries.peek() == null) {
                 // Read to end of file as there are no more entries after this.
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                ByteStreams.copy(inputStream, byteArrayOutputStream);
+                ByteStreams.copy(getInputStream(), byteArrayOutputStream);
                 return record.setBytes(byteArrayOutputStream.toByteArray());
             } else {
                 // Read next entry.
-                return record.setBytes(readBytes(inputStream, entries.peek().getDataOffset() - record.getDataOffset()));
+                return record.setBytes(readBytes(entries.peek().getDataOffset() - record.getDataOffset()));
             }
         } catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
