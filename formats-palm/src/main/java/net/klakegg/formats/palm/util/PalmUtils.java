@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+@Deprecated
 public class PalmUtils {
 
     private static byte[] emptyDate = new byte[]{0, 0, 0, 0};

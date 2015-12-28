@@ -1,9 +1,7 @@
 package net.klakegg.formats.palm;
 
-import net.klakegg.formats.palm.meta.PalmDatabaseHeader;
 import net.klakegg.formats.common.util.ByteArrayReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.klakegg.formats.palm.meta.PalmDatabaseHeader;
 
 import java.io.BufferedInputStream;
 import java.io.Closeable;
@@ -14,8 +12,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closeable {
-
-    private static Logger logger = LoggerFactory.getLogger(AbstractPalmReader.class);
 
     protected InputStream inputStream;
 
@@ -44,7 +40,6 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
         // Read record entries.
         for (int i = 1; i <= reader.getShort(4); i++)
             entries.add(new Record(readBytes(inputStream, 8)));
-        logger.debug("Found {} records.", entries.size());
     }
 
     /**

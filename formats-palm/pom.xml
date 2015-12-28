@@ -23,12 +23,6 @@
             <groupId>net.klakegg.formats</groupId>
             <artifactId>formats-test</artifactId>
         </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
