@@ -1,5 +1,6 @@
 package net.klakegg.formats.mobi;
 
+import net.klakegg.formats.common.util.ByteArrayReader;
 import net.klakegg.formats.mobi.meta.MobiHeader;
 import net.klakegg.formats.palm.PalmDatabaseReader;
 import net.klakegg.formats.palm.meta.PalmDocHeader;
@@ -17,8 +18,8 @@ public class Kf8Reader {
 
     public Kf8Reader(PalmDatabaseReader palmDatabaseReader) throws IOException {
         // Read first record.
-        byte[] header = palmDatabaseReader.next().getBytes();
-        logger.info(new String(header));
+        ByteArrayReader header = new ByteArrayReader(palmDatabaseReader.next().getBytes());
+        logger.info(header.getStr());
 
         // Read PalmDOC header.
         PalmDocHeader palmDocHeader = new PalmDocHeader(header);

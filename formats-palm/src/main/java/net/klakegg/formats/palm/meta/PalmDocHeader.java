@@ -11,9 +11,7 @@ public class PalmDocHeader {
     private short recordSize;
     private int currentPosition;
 
-    public PalmDocHeader(byte[] bytes) {
-        ByteArrayReader reader = new ByteArrayReader(bytes);
-
+    public PalmDocHeader(ByteArrayReader reader) {
         compression = Compression.findByIdentifier(reader.getShort(0));
         textLenght = reader.getInt(4);
         recordCount = reader.getShort(8);

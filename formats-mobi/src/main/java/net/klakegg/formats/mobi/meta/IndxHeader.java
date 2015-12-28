@@ -8,10 +8,8 @@ public class IndxHeader {
 
     private static Logger logger = LoggerFactory.getLogger(IndxHeader.class);
 
-    public IndxHeader(byte[] bytes) {
-        logger.info("{} {}", bytes.length, new String(bytes));
-
-        ByteArrayReader reader = new ByteArrayReader(bytes);
+    public IndxHeader(ByteArrayReader reader) {
+        logger.info("{} {}", reader.getBytes().length, reader.getStr());
 
         logger.info("Length: {}", reader.getInt(4));
         logger.info("Type: {}", reader.getInt(8));

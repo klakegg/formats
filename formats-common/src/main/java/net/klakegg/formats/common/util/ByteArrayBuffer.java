@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 /**
  * Very useful class from Sun Java internals.
@@ -110,6 +111,10 @@ public class ByteArrayBuffer extends OutputStream {
 
     public final InputStream newInputStream(int start, int length) {
         return new ByteArrayInputStream(this.buf, start, length);
+    }
+
+    public ByteArrayReader getReader(Charset charset) {
+        return new ByteArrayReader(buf, 0, this.count, charset);
     }
 
     public String toString() {

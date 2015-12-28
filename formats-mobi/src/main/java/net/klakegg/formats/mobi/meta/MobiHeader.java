@@ -22,9 +22,7 @@ public class MobiHeader {
     private int firstNonBookIndex;
     private byte[] exthFlag;
 
-    public MobiHeader(byte[] bytes) {
-        ByteArrayReader reader = new ByteArrayReader(bytes);
-
+    public MobiHeader(ByteArrayReader reader) {
         if (!"MOBI".equals(reader.getStr(16, 4)))
             throw new IllegalStateException("Mobi header not found.");
 
@@ -36,7 +34,7 @@ public class MobiHeader {
         fileVersion = reader.getInt(36);
         fileVersionMin = reader.getInt(104);
         name = reader.getStr(reader.getInt(84), reader.getInt(88));
-        huffmanRecord = new HuffmanRecord(reader.getInt(112), reader.getInt(116), reader.getInt(120), reader.getInt(124));
+        huffmanRecord = new HuffmanRecord(reader.getReader(112, 4 * 4));
         firstImageIndex = reader.getInt(108);
         firstNonBookIndex = reader.getInt(80);
         exthFlag = reader.getBytes(128, 4);

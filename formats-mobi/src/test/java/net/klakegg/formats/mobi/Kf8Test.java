@@ -19,7 +19,7 @@ public class Kf8Test {
         logger.info("{}", mobiReader.getMobiHeader());
         logger.info("{}", mobiReader.getExthHeader());
 
-        logger.info("{}", mobiReader.getContent());
+        logger.info("{}", mobiReader.getDocument());
 
     }
 

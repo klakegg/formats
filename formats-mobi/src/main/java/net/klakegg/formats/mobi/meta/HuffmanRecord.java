@@ -1,11 +1,17 @@
 package net.klakegg.formats.mobi.meta;
 
+import net.klakegg.formats.common.util.ByteArrayReader;
+
 public class HuffmanRecord {
 
     private int recordOffset;
     private int recordCount;
     private int tableOffset;
     private int tableLength;
+
+    public HuffmanRecord(ByteArrayReader reader) {
+        this(reader.getInt(0), reader.getInt(4), reader.getInt(8), reader.getInt(12));
+    }
 
     public HuffmanRecord(int recordOffset, int recordCount, int tableOffset, int tableLength) {
         this.recordOffset = recordOffset;
