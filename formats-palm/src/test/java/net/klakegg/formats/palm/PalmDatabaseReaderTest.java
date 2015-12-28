@@ -17,7 +17,7 @@ public class PalmDatabaseReaderTest {
         logger.info("{}", reader.getHeader());
 
         int counter = 0;
-        for (Entry entry : reader) {
+        for (Record record : reader) {
             // logger.info("{}", entry.getBytes());
             counter++;
         }

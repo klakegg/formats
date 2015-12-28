@@ -6,7 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
+public class PalmDatabaseReader extends AbstractPalmReader<Record> {
 
     protected int counter = 0;
 
@@ -15,7 +15,7 @@ public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
     }
 
     @Override
-    public Entry next() {
+    public Record next() {
         // Throw exception if close() is called.
         if (entries == null)
             throw new IllegalStateException("Unable to read after close.");
@@ -36,10 +36,10 @@ public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
                 // Read to end of file as there are no more entries after this.
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 ByteStreams.copy(inputStream, byteArrayOutputStream);
-                return new Entry(record, byteArrayOutputStream.toByteArray());
+                return record.setBytes(byteArrayOutputStream.toByteArray());
             } else {
                 // Read next entry.
-                return new Entry(record, readBytes(inputStream, entries.peek().getDataOffset() - record.getDataOffset()));
+                return record.setBytes(readBytes(inputStream, entries.peek().getDataOffset() - record.getDataOffset()));
             }
         } catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);

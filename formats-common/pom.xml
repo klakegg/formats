@@ -9,25 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>formats-palm</artifactId>
+    <artifactId>formats-common</artifactId>
 
-    <name>Formats :: Palm</name>
+    <name>Formats :: Common</name>
 
     <dependencies>
-        <!-- Formats -->
+        <!-- Google -->
         <dependency>
-            <groupId>net.klakegg.formats</groupId>
-            <artifactId>formats-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.klakegg.formats</groupId>
-            <artifactId>formats-test</artifactId>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
 

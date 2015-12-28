@@ -1,4 +1,4 @@
-package net.klakegg.formats.palm.util;
+package net.klakegg.formats.common.util;
 
 //
 // Source code recreated from a .class file by IntelliJ IDEA
@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Very useful class from Sun Java internals.
+ */
 public class ByteArrayBuffer extends OutputStream {
     protected byte[] buf;
     private int count;

@@ -1,7 +1,7 @@
 package net.klakegg.formats.palm.meta;
 
-import net.klakegg.formats.palm.PalmUtils;
 import net.klakegg.formats.palm.code.Compression;
+import net.klakegg.formats.common.util.ByteArrayReader;
 
 public class PalmDocHeader {
 
@@ -12,11 +12,13 @@ public class PalmDocHeader {
     private int currentPosition;
 
     public PalmDocHeader(byte[] bytes) {
-        compression = Compression.findByIdentifier(PalmUtils.readShort(bytes, 0));
-        textLenght = PalmUtils.readInt(bytes, 4);
-        recordCount = PalmUtils.readShort(bytes, 8);
-        recordSize = PalmUtils.readShort(bytes, 10);
-        currentPosition = PalmUtils.readInt(bytes, 12);
+        ByteArrayReader reader = new ByteArrayReader(bytes);
+
+        compression = Compression.findByIdentifier(reader.getShort(0));
+        textLenght = reader.getInt(4);
+        recordCount = reader.getShort(8);
+        recordSize = reader.getShort(10);
+        currentPosition = reader.getInt(12);
     }
 
     public Compression getCompression() {

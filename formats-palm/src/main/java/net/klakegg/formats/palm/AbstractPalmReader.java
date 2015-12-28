@@ -1,5 +1,7 @@
 package net.klakegg.formats.palm;
 
+import net.klakegg.formats.palm.meta.PalmDatabaseHeader;
+import net.klakegg.formats.common.util.ByteArrayReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +19,7 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
 
     protected InputStream inputStream;
 
-    protected DatabaseHeader header;
+    protected PalmDatabaseHeader header;
     protected Deque<Record> entries = new LinkedList<>();
 
     /**
@@ -32,15 +34,15 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
         this.inputStream = inputStream;
 
         // Read meta
-        this.header = new DatabaseHeader(readBytes(inputStream, 72));
+        this.header = new PalmDatabaseHeader(readBytes(inputStream, 72));
 
         // Make sure to read files containing only one record list.
-        byte[] bytes = readBytes(inputStream, 6);
-        if (PalmUtils.readShort(bytes, 0) != 0)
+        ByteArrayReader reader = new ByteArrayReader(readBytes(inputStream, 6));
+        if (reader.getShort(0) != 0)
             throw new RuntimeException("Multiple record lists not supported.");
 
         // Read record entries.
-        for (int i = 1; i <= PalmUtils.readShort(bytes, 4); i++)
+        for (int i = 1; i <= reader.getShort(4); i++)
             entries.add(new Record(readBytes(inputStream, 8)));
         logger.debug("Found {} records.", entries.size());
     }
@@ -50,7 +52,7 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
      *
      * @return Database meta.
      */
-    public DatabaseHeader getHeader() {
+    public PalmDatabaseHeader getHeader() {
         return header;
     }
 

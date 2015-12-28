@@ -1,7 +1,7 @@
 package net.klakegg.formats.palm.code;
 
-import net.klakegg.formats.palm.compression.CompressionAlgorithm;
-import net.klakegg.formats.palm.compression.NoCompression;
+import net.klakegg.formats.common.compression.CompressionAlgorithm;
+import net.klakegg.formats.common.compression.NoCompression;
 import net.klakegg.formats.palm.compression.PalmDocCompression;
 
 public enum Compression implements CompressionAlgorithm {

@@ -1,4 +1,4 @@
-package net.klakegg.formats.palm.compression;
+package net.klakegg.formats.common.compression;
 
 public interface CompressionAlgorithm {
 

@@ -1,8 +1,11 @@
-package net.klakegg.formats.palm;
+package net.klakegg.formats.palm.meta;
+
+import net.klakegg.formats.common.util.ByteArrayReader;
+import net.klakegg.formats.palm.util.PalmUtils;
 
 import java.util.Date;
 
-public class DatabaseHeader {
+public class PalmDatabaseHeader {
 
     private String name;
     private short attributes;
@@ -17,26 +20,28 @@ public class DatabaseHeader {
     private String creator;
     private String uniqueIDSeed;
 
-    DatabaseHeader(byte[] bytes) {
-        this.name = PalmUtils.readString(bytes, 0, 31).trim();
-        this.attributes = PalmUtils.readShort(bytes, 32);
-        this.version = PalmUtils.readShort(bytes, 34);
+    public PalmDatabaseHeader(byte[] bytes) {
+        ByteArrayReader reader = new ByteArrayReader(bytes);
+
+        this.name = reader.getStr(0, 31).trim();
+        this.attributes = reader.getShort(32);
+        this.version = reader.getShort(34);
         this.creationDate = PalmUtils.readDate(bytes, 36);
         this.modificationDate = PalmUtils.readDate(bytes, 40);
         this.lastBackupDate = PalmUtils.readDate(bytes, 44);
-        this.modificationNumber = PalmUtils.readInt(bytes, 48);
-        this.appInfoID = PalmUtils.readInt(bytes, 52);
-        this.sortInfoID = PalmUtils.readInt(bytes, 56);
-        this.type = PalmUtils.readString(bytes, 60, 4);
-        this.creator = PalmUtils.readString(bytes, 64, 4);
-        this.uniqueIDSeed = PalmUtils.readString(bytes, 68, 4);
+        this.modificationNumber = reader.getInt(48);
+        this.appInfoID = reader.getInt(52);
+        this.sortInfoID = reader.getInt(56);
+        this.type = reader.getStr(60, 4);
+        this.creator = reader.getStr(64, 4);
+        this.uniqueIDSeed = reader.getStr(68, 4);
     }
 
     public String getName() {
         return name;
     }
 
-    short getAttributes() {
+    public short getAttributes() {
         return attributes;
     }
 
@@ -60,11 +65,11 @@ public class DatabaseHeader {
         return modificationNumber;
     }
 
-    int getAppInfoID() {
+    public int getAppInfoID() {
         return appInfoID;
     }
 
-    int getSortInfoID() {
+    public int getSortInfoID() {
         return sortInfoID;
     }
 
@@ -76,13 +81,13 @@ public class DatabaseHeader {
         return creator;
     }
 
-    String getUniqueIDSeed() {
+    public String getUniqueIDSeed() {
         return uniqueIDSeed;
     }
 
     @Override
     public String toString() {
-        return "DatabaseHeader{" +
+        return "PalmDatabaseHeader{" +
                 "name='" + name + '\'' +
                 ", attributes=" + attributes +
                 ", version=" + version +

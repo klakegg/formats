@@ -15,26 +15,30 @@ public class Kf8Reader {
 
     private String content;
 
-    public Kf8Reader(PalmDatabaseReader palmDatabaseReader) {
+    public Kf8Reader(PalmDatabaseReader palmDatabaseReader) throws IOException {
+        // Read first record.
         byte[] header = palmDatabaseReader.next().getBytes();
         logger.info(new String(header));
 
+        // Read PalmDOC header.
         PalmDocHeader palmDocHeader = new PalmDocHeader(header);
         logger.info("{}", palmDocHeader);
 
+        // Read MOBI header.
         MobiHeader mobiHeader = new MobiHeader(header);
         logger.info("{}", mobiHeader);
 
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            for (int i = 0; i < palmDocHeader.getRecordCount(); i++)
-                byteArrayOutputStream.write(palmDatabaseReader.next().getBytes());
-            content = new String(palmDocHeader.getCompression().decompress(byteArrayOutputStream.toByteArray()), mobiHeader.getEncoding());
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
+        // Fetch content.
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        for (int i = 0; i < palmDocHeader.getRecordCount(); i++)
+            byteArrayOutputStream.write(palmDatabaseReader.next().getBytes());
+        content = new String(palmDocHeader.getCompression().decompress(byteArrayOutputStream.toByteArray()), mobiHeader.getEncoding());
 
         while (palmDatabaseReader.hasNext())
             logger.info(new String(palmDatabaseReader.next().getBytes()));
+    }
+
+    public String getContent() {
+        return content;
     }
 }

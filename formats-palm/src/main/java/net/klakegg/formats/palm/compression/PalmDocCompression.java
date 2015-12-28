@@ -1,6 +1,7 @@
 package net.klakegg.formats.palm.compression;
 
-import net.klakegg.formats.palm.util.ByteArrayBuffer;
+import net.klakegg.formats.common.util.ByteArrayBuffer;
+import net.klakegg.formats.common.compression.CompressionAlgorithm;
 
 /**
  * https://en.wikibooks.org/wiki/Data_Compression/Dictionary_compression#PalmDoc

@@ -1,17 +1,18 @@
 package net.klakegg.formats.mobi;
 
 import net.klakegg.formats.mobi.code.Encryption;
+import net.klakegg.formats.mobi.media.BuildLog;
 import net.klakegg.formats.mobi.media.MediaFile;
+import net.klakegg.formats.mobi.media.SourceFile;
 import net.klakegg.formats.mobi.meta.*;
-import net.klakegg.formats.palm.DatabaseHeader;
+import net.klakegg.formats.palm.meta.PalmDatabaseHeader;
 import net.klakegg.formats.palm.PalmDatabaseReader;
+import net.klakegg.formats.common.util.ByteArrayReader;
 import net.klakegg.formats.palm.meta.PalmDocHeader;
-import net.klakegg.formats.palm.PalmUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class MobiReader {
 
     private String content;
     private List<MediaFile> mediaFiles = new ArrayList<>();
+    private List<Object> extras = new ArrayList<>();
 
     public MobiReader(InputStream inputStream) throws IOException {
         // Open content as Palm Database (PDB).
@@ -43,22 +45,22 @@ public class MobiReader {
             throw new IllegalStateException("No records found.");
 
         // Fetch first record as this contains meta.
-        byte[] header = palmDatabaseReader.next().getBytes();
+        ByteArrayReader header = new ByteArrayReader(palmDatabaseReader.next().getBytes());
 
         // Create PalmDOC meta.
-        palmDocHeader = new PalmDocHeader(header);
+        palmDocHeader = new PalmDocHeader(header.getBytes());
 
         // Create MOBI meta.
-        mobiHeader = new MobiHeader(header);
+        mobiHeader = new MobiHeader(header.getBytes());
 
         // Read EXTH meta if found
-        if ("EXTH".equals(PalmUtils.readString(header, 16 + mobiHeader.getHeaderLength(), 4)))
-            exthHeader = new ExthHeader(PalmUtils.readPart(header, 16 + mobiHeader.getHeaderLength(), PalmUtils.readInt(header, 16 + mobiHeader.getHeaderLength() + 4)));
+        if ("EXTH".equals(header.getStr(16 + mobiHeader.getHeaderLength(), 4)))
+            exthHeader = new ExthHeader(header.getBytes(16 + mobiHeader.getHeaderLength(), header.getInt(16 + mobiHeader.getHeaderLength() + 4)));
 
         // Fetch content
         if (mobiHeader.getEncryption().equals(Encryption.NONE)) {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            while (palmDatabaseReader.getCounter() < mobiHeader.getFirstNonBookIndex())
+            for (int i = 0; i < palmDocHeader.getRecordCount(); i++)
                 byteArrayOutputStream.write(palmDatabaseReader.next().getBytes());
             content = new String(palmDocHeader.getCompression().decompress(byteArrayOutputStream.toByteArray()), mobiHeader.getEncoding()).trim();
         }
@@ -77,13 +79,9 @@ public class MobiReader {
             } else if (new String(bytes).startsWith("FCIS")) {
                 new FcisHeader(bytes);
             } else if (new String(bytes).startsWith("SRCS")) {
-                FileOutputStream fileOutputStream = new FileOutputStream("source.zip");
-                fileOutputStream.write(bytes, 16, bytes.length - 16);
-                fileOutputStream.close();
+                extras.add(new SourceFile(bytes));
             } else if (new String(bytes).startsWith("CMET")) {
-                FileOutputStream fileOutputStream = new FileOutputStream("build.log");
-                fileOutputStream.write(bytes, 16, bytes.length - 16);
-                fileOutputStream.close();
+                extras.add(new BuildLog(bytes));
             } else if (new String(bytes).equals("BOUNDARY")) {
                 new Kf8Reader(palmDatabaseReader);
             } else {
@@ -92,7 +90,7 @@ public class MobiReader {
         }
     }
 
-    public DatabaseHeader getDatabaseHeader() {
+    public PalmDatabaseHeader getDatabaseHeader() {
         return palmDatabaseReader.getHeader();
     }
 
@@ -117,5 +115,9 @@ public class MobiReader {
 
     public List<MediaFile> getMediaFiles() {
         return mediaFiles;
+    }
+
+    public List<Object> getExtras() {
+        return extras;
     }
 }

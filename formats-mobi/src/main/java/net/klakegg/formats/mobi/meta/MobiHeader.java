@@ -2,7 +2,7 @@ package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.mobi.code.Encryption;
 import net.klakegg.formats.mobi.code.Type;
-import net.klakegg.formats.palm.PalmUtils;
+import net.klakegg.formats.common.util.ByteArrayReader;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -23,31 +23,23 @@ public class MobiHeader {
     private byte[] exthFlag;
 
     public MobiHeader(byte[] bytes) {
-        if (!"MOBI".equals(PalmUtils.readString(bytes, 16, 4)))
+        ByteArrayReader reader = new ByteArrayReader(bytes);
+
+        if (!"MOBI".equals(reader.getStr(16, 4)))
             throw new IllegalStateException("Mobi header not found.");
 
-        encryption = Encryption.findByIdentifier(PalmUtils.readShort(bytes, 12));
-        headerLength = PalmUtils.readInt(bytes, 20);
-        type = Type.findByIdentifier(PalmUtils.readInt(bytes, 24));
-
-        switch (PalmUtils.readInt(bytes, 28)) {
-            case 1252:
-                // Set CP1252
-                encoding = StandardCharsets.US_ASCII;
-                break;
-            case 65001:
-                encoding = StandardCharsets.UTF_8;
-                break;
-        }
-
-        uniqueId = PalmUtils.readInt(bytes, 32);
-        fileVersion = PalmUtils.readInt(bytes, 36);
-        fileVersionMin = PalmUtils.readInt(bytes, 104);
-        name = PalmUtils.readString(bytes, PalmUtils.readInt(bytes, 84), PalmUtils.readInt(bytes, 88));
-        huffmanRecord = new HuffmanRecord(PalmUtils.readInt(bytes, 112), PalmUtils.readInt(bytes, 116), PalmUtils.readInt(bytes, 120), PalmUtils.readInt(bytes, 124));
-        firstImageIndex = PalmUtils.readInt(bytes, 108);
-        firstNonBookIndex = PalmUtils.readInt(bytes, 80);
-        exthFlag = PalmUtils.readPart(bytes, 128, 4);
+        encryption = Encryption.findByIdentifier(reader.getShort(12));
+        headerLength = reader.getInt(20);
+        type = Type.findByIdentifier(reader.getInt(24));
+        setEncoding(reader.getInt(28));
+        uniqueId = reader.getInt(32);
+        fileVersion = reader.getInt(36);
+        fileVersionMin = reader.getInt(104);
+        name = reader.getStr(reader.getInt(84), reader.getInt(88));
+        huffmanRecord = new HuffmanRecord(reader.getInt(112), reader.getInt(116), reader.getInt(120), reader.getInt(124));
+        firstImageIndex = reader.getInt(108);
+        firstNonBookIndex = reader.getInt(80);
+        exthFlag = reader.getBytes(128, 4);
 
 //        logger.info("{}", PalmUtils.readInt(bytes, 40)); // Ortographic index
 //        logger.info("{}", PalmUtils.readInt(bytes, 44)); // Inflection index
@@ -79,6 +71,18 @@ public class MobiHeader {
 
     public Charset getEncoding() {
         return encoding;
+    }
+
+    private void setEncoding(int value) {
+        switch (value) {
+            case 1252:
+                // Set CP1252
+                encoding = StandardCharsets.US_ASCII;
+                break;
+            case 65001:
+                encoding = StandardCharsets.UTF_8;
+                break;
+        }
     }
 
     public int getUniqueId() {

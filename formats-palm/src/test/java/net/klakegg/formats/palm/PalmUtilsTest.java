@@ -1,5 +1,6 @@
 package net.klakegg.formats.palm;
 
+import net.klakegg.formats.palm.util.PalmUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
