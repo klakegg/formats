@@ -1,4 +1,4 @@
-package net.klakegg.formats.mobi;
+package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.mobi.code.Encryption;
 import net.klakegg.formats.mobi.code.Type;
@@ -69,7 +69,7 @@ public class MobiHeader {
         return encryption;
     }
 
-    int getHeaderLength() {
+    public int getHeaderLength() {
         return headerLength;
     }
 
@@ -97,19 +97,19 @@ public class MobiHeader {
         return name;
     }
 
-    HuffmanRecord getHuffmanRecord() {
+    public HuffmanRecord getHuffmanRecord() {
         return huffmanRecord;
     }
 
-    int getFirstImageIndex() {
+    public int getFirstImageIndex() {
         return firstImageIndex;
     }
 
-    int getFirstNonBookIndex() {
+    public int getFirstNonBookIndex() {
         return firstNonBookIndex;
     }
 
-    byte[] getExthFlag() {
+    public byte[] getExthFlag() {
         return exthFlag;
     }
 

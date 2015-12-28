@@ -1,5 +1,6 @@
-package net.klakegg.formats.palm;
+package net.klakegg.formats.palm.meta;
 
+import net.klakegg.formats.palm.PalmUtils;
 import net.klakegg.formats.palm.code.Compression;
 
 public class PalmDocHeader {

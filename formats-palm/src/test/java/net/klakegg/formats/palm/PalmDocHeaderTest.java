@@ -1,6 +1,7 @@
 package net.klakegg.formats.palm;
 
 import net.klakegg.formats.palm.code.Compression;
+import net.klakegg.formats.palm.meta.PalmDocHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;

@@ -8,6 +8,8 @@ import java.io.InputStream;
 
 public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
 
+    protected int counter = 0;
+
     public PalmDatabaseReader(InputStream inputStream) throws IOException {
         super(inputStream);
     }
@@ -24,9 +26,11 @@ public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
             return null;
 
         try {
+            counter++;
+
             // Align inputStream to read first entry in database.
-            if (counter < record.getDataOffset())
-                readBytes(inputStream, record.getDataOffset() - counter);
+            if (byteCounter < record.getDataOffset())
+                readBytes(inputStream, record.getDataOffset() - byteCounter);
 
             if (entries.peek() == null) {
                 // Read to end of file as there are no more entries after this.
@@ -40,5 +44,9 @@ public class PalmDatabaseReader extends AbstractPalmReader<Entry> {
         } catch (IOException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }

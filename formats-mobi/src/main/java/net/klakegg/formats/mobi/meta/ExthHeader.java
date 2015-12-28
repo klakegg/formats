@@ -1,4 +1,4 @@
-package net.klakegg.formats.mobi;
+package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.palm.PalmUtils;
 
