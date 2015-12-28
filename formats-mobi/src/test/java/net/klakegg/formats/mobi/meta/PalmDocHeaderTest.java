@@ -1,8 +1,8 @@
-package net.klakegg.formats.palm;
+package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.common.util.ByteArrayReader;
-import net.klakegg.formats.palm.code.Compression;
-import net.klakegg.formats.palm.meta.PalmDocHeader;
+import net.klakegg.formats.palm.PalmDatabaseReader;
+import net.klakegg.formats.mobi.code.Compression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;

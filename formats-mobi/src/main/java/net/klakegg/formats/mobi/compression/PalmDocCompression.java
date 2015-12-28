@@ -1,4 +1,4 @@
-package net.klakegg.formats.palm.compression;
+package net.klakegg.formats.mobi.compression;
 
 import net.klakegg.formats.common.util.ByteArrayBuffer;
 import net.klakegg.formats.common.compression.CompressionAlgorithm;

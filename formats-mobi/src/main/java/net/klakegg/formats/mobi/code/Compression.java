@@ -1,8 +1,8 @@
-package net.klakegg.formats.palm.code;
+package net.klakegg.formats.mobi.code;
 
 import net.klakegg.formats.common.compression.CompressionAlgorithm;
 import net.klakegg.formats.common.compression.NoCompression;
-import net.klakegg.formats.palm.compression.PalmDocCompression;
+import net.klakegg.formats.mobi.compression.PalmDocCompression;
 
 public enum Compression implements CompressionAlgorithm {
     NONE(1, new NoCompression()),

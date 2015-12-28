@@ -2,7 +2,7 @@ package net.klakegg.formats.mobi.content;
 
 import net.klakegg.formats.common.util.ByteArrayReader;
 import net.klakegg.formats.mobi.meta.MobiHeader;
-import net.klakegg.formats.palm.meta.PalmDocHeader;
+import net.klakegg.formats.mobi.meta.PalmDocHeader;
 
 public class DocumentContent extends AbstractContent {
 

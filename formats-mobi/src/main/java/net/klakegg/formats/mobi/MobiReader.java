@@ -12,7 +12,7 @@ import net.klakegg.formats.mobi.content.media.GifMediaContent;
 import net.klakegg.formats.mobi.content.media.JpegMediaContent;
 import net.klakegg.formats.mobi.meta.*;
 import net.klakegg.formats.palm.PalmDatabaseReader;
-import net.klakegg.formats.palm.meta.PalmDocHeader;
+import net.klakegg.formats.mobi.meta.PalmDocHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -13,7 +13,7 @@ public class Kf8Test {
 
     @Test
     public void simple() throws IOException {
-        MobiReader mobiReader = new MobiReader(getClass().getResourceAsStream("/kf8/KF8Sample.mobi"));
+        MobiReader mobiReader = new MobiReader(getClass().getResourceAsStream("/mobi/kf8/KF8Sample.mobi"));
 
         logger.info("{}", mobiReader.getExthHeader());
 

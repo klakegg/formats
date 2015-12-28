@@ -48,6 +48,10 @@ public class ByteArrayReader {
         return Shorts.fromByteArray(getBytes(offset, 2));
     }
 
+    public byte getByte(int offset) {
+        return bytes[offset];
+    }
+
     public byte[] getBytes(int offset, int length) {
         return getBytes(bytes, offset, length);
     }

@@ -31,7 +31,7 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
             this.bufferedInputStream = new BufferedInputStream(inputStream);
 
         // Read meta
-        this.header = new PalmDatabaseHeader(readBytes(72));
+        this.header = new PalmDatabaseHeader(new ByteArrayReader(readBytes(72)));
 
         // Make sure to read files containing only one record list.
         ByteArrayReader reader = new ByteArrayReader(readBytes(6));
@@ -40,7 +40,7 @@ abstract class AbstractPalmReader<T> implements Iterable<T>, Iterator<T>, Closea
 
         // Read record entries.
         for (int i = 1; i <= reader.getShort(4); i++)
-            entries.add(new Record(readBytes(8)));
+            entries.add(new Record(new ByteArrayReader(readBytes(8))));
     }
 
     /**
