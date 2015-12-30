@@ -5,6 +5,7 @@ import com.google.common.primitives.Shorts;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 public class ByteArrayWriter {
 
@@ -21,7 +22,7 @@ public class ByteArrayWriter {
     }
 
     public void setInt(int offset, int value) {
-        setBytes(offset, Ints.toByteArray(value));
+        setBytes(offset, Ints.toByteArray(value), 4);
     }
 
     public void setShort(int offset, int value) {
@@ -29,18 +30,24 @@ public class ByteArrayWriter {
     }
 
     public void setShort(int offset, short value) {
-        setBytes(offset, Shorts.toByteArray(value));
+        setBytes(offset, Shorts.toByteArray(value), 2);
     }
 
     public void setStr(int offset, String value, int max) {
         if (value == null)
             return;
 
-        setBytes(offset, value.length() > max ? value.substring(0, max).getBytes() : value.getBytes());
+        setBytes(offset, value.getBytes(StandardCharsets.US_ASCII), max);
     }
 
     public void setBytes(int offset, byte[] value) {
-        for (int i = 0; i < value.length; i++)
+        setBytes(offset, value, value.length);
+    }
+
+    public void setBytes(int offset, byte[] value, int max) {
+        int length = Math.min(value.length, max) > bytes.length - offset ? bytes.length - offset : Math.min(value.length, max);
+
+        for (int i = 0; i < length; i++)
             bytes[offset + i] = value[i];
     }
 

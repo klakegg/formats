@@ -39,7 +39,7 @@ public class PalmDatabaseHeader {
     public PalmDatabaseHeader() {
         setAppInfoID(0);
         setSortInfoID(0);
-        setUniqueIDSeed("    ");
+        setUniqueIDSeed("   -");
     }
 
     public String getName() {
