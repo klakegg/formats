@@ -3,7 +3,11 @@ package net.klakegg.formats.palm;
 import com.google.common.primitives.Ints;
 import net.klakegg.formats.common.util.ByteArrayReader;
 
-public class Record {
+import java.io.Serializable;
+
+public class Record implements Serializable {
+
+    private static final long serialVersionUID = 5112883869196658342L;
 
     private int dataOffset;
     private byte attributes;

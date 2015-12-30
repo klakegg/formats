@@ -4,10 +4,13 @@ import net.klakegg.formats.mobi.code.Encryption;
 import net.klakegg.formats.mobi.code.Type;
 import net.klakegg.formats.common.util.ByteArrayReader;
 
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class MobiHeader {
+public class MobiHeader implements Serializable {
+
+    private static final long serialVersionUID = 8851187441253796095L;
 
     private Encryption encryption;
     private int headerLength;

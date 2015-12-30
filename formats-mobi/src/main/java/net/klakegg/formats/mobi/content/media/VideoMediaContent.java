@@ -3,11 +3,11 @@ package net.klakegg.formats.mobi.content.media;
 import net.klakegg.formats.common.util.ByteArrayReader;
 import net.klakegg.formats.mobi.content.MediaContent;
 
-public class JpegMediaContent extends MediaContent {
+public class VideoMediaContent extends MediaContent {
 
-    private static final long serialVersionUID = -8677005580711206946L;
+    private static final long serialVersionUID = -8860500590096257424L;
 
-    public JpegMediaContent(ByteArrayReader reader) {
+    public VideoMediaContent(ByteArrayReader reader) {
         super(reader);
     }
 }

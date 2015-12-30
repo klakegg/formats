@@ -3,7 +3,11 @@ package net.klakegg.formats.mobi.meta;
 import net.klakegg.formats.mobi.code.Compression;
 import net.klakegg.formats.common.util.ByteArrayReader;
 
-public class PalmDocHeader {
+import java.io.Serializable;
+
+public class PalmDocHeader implements Serializable {
+
+    private static final long serialVersionUID = -7314794139014097528L;
 
     private Compression compression;
     private int textLenght;

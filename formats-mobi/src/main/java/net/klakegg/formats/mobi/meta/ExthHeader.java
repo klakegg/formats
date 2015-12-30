@@ -2,10 +2,13 @@ package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.common.util.ByteArrayReader;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExthHeader {
+public class ExthHeader implements Serializable {
+
+    private static final long serialVersionUID = -1947634910151549084L;
 
     private Map<Integer, String> values = new HashMap<>();
 

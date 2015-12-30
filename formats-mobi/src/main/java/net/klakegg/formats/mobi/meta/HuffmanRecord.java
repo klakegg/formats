@@ -2,7 +2,11 @@ package net.klakegg.formats.mobi.meta;
 
 import net.klakegg.formats.common.util.ByteArrayReader;
 
-public class HuffmanRecord {
+import java.io.Serializable;
+
+public class HuffmanRecord implements Serializable {
+
+    private static final long serialVersionUID = 2594398867696536485L;
 
     private int recordOffset;
     private int recordCount;
