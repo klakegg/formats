@@ -38,7 +38,7 @@ public class MobiReader {
         if (!"BOOK".equals(palmDatabaseReader.getHeader().getType()) || !"MOBI".equals(palmDatabaseReader.getHeader().getCreator()))
             throw new IllegalStateException("Invalid metadata in database header for mobi format.");
 
-        ExthHeader exthHeader = null;
+
 
         List<DocumentContent> documents = new ArrayList<>();
         List<MediaContent> media = new ArrayList<>();
@@ -56,7 +56,8 @@ public class MobiReader {
             // Create MOBI header.
             MobiHeader mobiHeader = new MobiHeader(header);
 
-            // Read EXTH header if found. (Only first header may have EXTH header.)
+            // Read EXTH header if found.
+            ExthHeader exthHeader = null;
             if ("EXTH".equals(header.getStr(16 + mobiHeader.getHeaderLength(), 4)))
                 exthHeader = new ExthHeader(header.getReader(16 + mobiHeader.getHeaderLength(), header.getInt(16 + mobiHeader.getHeaderLength() + 4)));
 
@@ -70,6 +71,7 @@ public class MobiReader {
                 documentContent = new DocumentContent(
                         palmDocHeader,
                         mobiHeader,
+                        exthHeader,
                         byteArrayBuffer
                                 .getReader(mobiHeader.getEncoding())
                                 .decompress(palmDocHeader.getCompression())
@@ -119,6 +121,6 @@ public class MobiReader {
 
         palmDatabaseReader.close();
 
-        return new Mobi(exthHeader, documents, media, extras);
+        return new Mobi(documents, media, extras);
     }
 }
